@@ -28,16 +28,22 @@ export type CoachingEvent = {
  * Enthält alle relevanten Informationen, die einen Benutzer beschreiben.
  */
 export type User = {
-  id: number;                        // Eindeutige Benutzer-ID
-  firstName: string;                 // Vorname
-  lastName: string;                  // Nachname
-  email: string;                     // E-Mail-Adresse
-  role: 'admin' | 'coach' | 'mentor' | 'guest'; // Benutzerrolle
-  canShowFullName: boolean;          // Gibt an, ob der volle Name im Profil angezeigt werden darf
-  hasVisibleDisability: boolean;     // Zeigt an, ob eine sichtbare Behinderung vorliegt
-  hasInvisibleDisability: boolean;   // Zeigt an, ob eine unsichtbare Behinderung vorliegt
-  isDisabilityVisibleOnProfile: boolean; // Bestimmt, ob die Behinderung im Profil sichtbar ist
-  description?: string; // Add description property to User type
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: 'admin' | 'coach' | 'mentor' | 'guest'; // Diese Rolle wird jetzt als Badge genutzt.
+  canShowFullName: boolean;
+  hasVisibleDisability: boolean;
+  hasInvisibleDisability: boolean;
+  isDisabilityVisibleOnProfile: boolean;
+  description?: string;
+
+  // Neu / optional:
+  avatar?: string;
+  github?: string;
+  twitter?: string;
+  linkedin?: string;
 };
 
 /**
