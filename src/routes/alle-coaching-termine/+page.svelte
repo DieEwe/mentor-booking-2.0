@@ -6,11 +6,17 @@
   // Importiere die "get"-Funktion, um initial synchron auf den Wert eines Stores zuzugreifen.
   import { get } from 'svelte/store';
 
-  // Importiere die Kalender-Komponente und das TimeGrid Plugin aus der Event Calendar-Bibliothek.
-  import Calendar from '@event-calendar/core';
-  import TimeGrid from '@event-calendar/time-grid';
-  // Importiere die zugehörigen CSS-Dateien der Event Calendar-Bibliothek.
-  import '@event-calendar/core/index.css';
+  // Importiere die FullCalendar-Komponente und die Plugins.
+  import FullCalendar from 'svelte-fullcalendar';
+  import dayGridPlugin from '@fullcalendar/daygrid';
+  import timeGridPlugin from '@fullcalendar/timegrid';
+  import interactionPlugin from '@fullcalendar/interaction';
+  import '@fullcalendar/core/main.css';
+  import '@fullcalendar/daygrid/main.css';
+  import '@fullcalendar/timegrid/main.css';
+
+  // Importiere die EventTable-Komponente.
+  import EventTable from '$lib/components/EventTable.svelte';
 
   // Lese initial den Wert des coachingEvents-Stores aus und speichere ihn in der lokalen Variable "localEvents".
   // Falls der Store leer ist, wird ein leeres Array verwendet.
@@ -138,7 +144,7 @@
   $: isCoach = user.role === 'coach' || user.role === 'admin';
 
   // Definiere ein Array der Plugins für den Kalender. Hier wird ausschließlich das TimeGrid Plugin verwendet.
-  let plugins = [TimeGrid];
+  let plugins = [timeGridPlugin, interactionPlugin];
 
   // Erstelle ein reaktives Options-Objekt für den Kalender.
   // Dieses Objekt wird neu berechnet, wenn sich "calendarEvents" ändert.
@@ -153,144 +159,23 @@
   Toggle to {viewMode === 'table' ? 'Calendar' : 'Table'} View
 </button>
 
+<!--table view-->
 {#if viewMode === 'table'}
-  <!-- Tabellenansicht: Anzeige aller Coaching Termine -->
-  <h2 class="text-2xl font-semibold mb-4">Alle Coaching Termine</h2>
-  {#if localEvents.length === 0}
-    <!-- Falls keine Events vorhanden sind, wird diese Nachricht angezeigt -->
-    <p>No events available.</p>
-  {:else}
-    <!-- Tabelle mit allen Event-Daten -->
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th class="px-6 py-3">Date</th>
-            <th class="px-6 py-3">Time</th>
-            <th class="px-6 py-3">Company</th>
-            <th class="px-6 py-3">Address</th>
-            <th class="px-6 py-3">Säule</th>
-            <th class="px-6 py-3">Mentor</th>
-            <th class="px-6 py-3">Coach</th>
-            <th class="px-6 py-3">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Schleife über alle Events, um für jedes eine Tabellenzeile zu erzeugen -->
-          {#each localEvents as evt}
-              {#if evt.editing}
-                <!-- Bearbeitungsmodus: Zeige Input-Felder -->
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <!-- Datum als Input (Typ "date" sorgt für einen Datepicker) -->
-                  <td class="px-6 py-4">
-                    <input
-                      type="date"
-                      class="border p-1"
-                      bind:value={evt.date} />
-                  </td>
-                  <!-- Uhrzeit als Input (Typ "time") -->
-                  <td class="px-6 py-4">
-                    <input
-                      type="time"
-                      class="border p-1"
-                      bind:value={evt.time} />
-                  </td>
-                  <!-- Firmenname -->
-                  <td class="px-6 py-4">
-                    <input
-                      type="text"
-                      class="border p-1"
-                      bind:value={evt.company} />
-                  </td>
-                  <!-- Adresse -->
-                  <td class="px-6 py-4">
-                    <input
-                      type="text"
-                      class="border p-1"
-                      bind:value={evt.address} />
-                  </td>
-                  <!-- Säule und Säulenbeschreibung -->
-                  <td class="px-6 py-4">
-                    <input
-                      type="number"
-                      class="border p-1 w-16"
-                      bind:value={evt.saeule} />
-                    <input
-                      type="text"
-                      class="border p-1 ml-2"
-                      bind:value={evt.saeuleDesc} />
-                  </td>
-                  <!-- Mentorname (hier als Anzeige, nicht editierbar) -->
-                  <td class="px-6 py-4">
-                    {evt.mentorName || '—'}
-                  </td>
-                  <!-- Coachname (ebenfalls als Anzeige) -->
-                  <td class="px-6 py-4">
-                    {evt.coachName || '—'}
-                  </td>
-                  <!-- Aktionen: Save und Cancel -->
-                  <td class="px-6 py-4 flex gap-2">
-                    <button
-                      class="bg-green-500 text-white px-2 py-1 rounded"
-                      on:click={() => saveEvent(evt.id)}>
-                      Save
-                    </button>
-                    <button
-                      class="bg-gray-500 text-white px-2 py-1 rounded"
-                      on:click={() => toggleEditMode(evt.id)}>
-                      Cancel
-                    </button>
-                  </td>
-                </tr>
-              {:else}
-                <!-- Normaler Anzeigemodus -->
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <td class="px-6 py-4">{evt.date}</td>
-                  <td class="px-6 py-4">{evt.time}</td>
-                  <td class="px-6 py-4">{evt.company}</td>
-                  <td class="px-6 py-4">{evt.address}</td>
-                  <td class="px-6 py-4">{evt.saeule} ({evt.saeuleDesc})</td>
-                  <td class="px-6 py-4">{evt.mentorName || '—'}</td>
-                  <td class="px-6 py-4">{evt.coachName || '—'}</td>
-                  <td class="px-6 py-4 flex gap-2">
-                    {#if isMentor && !evt.mentorName}
-                      <button
-                        class="bg-blue-600 text-white px-2 py-1 rounded"
-                        on:click={() => optInAsMentor(evt.id)}>
-                        Opt In
-                      </button>
-                    {/if}
-                    {#if isCoach}
-                      <button
-                        class="bg-yellow-500 text-white px-2 py-1 rounded"
-                        on:click={() => toggleEditMode(evt.id)}>
-                        Edit
-                      </button>
-                      <button
-                        class="bg-red-600 text-white px-2 py-1 rounded"
-                        on:click={() => deleteEvent(evt.id)}>
-                        Delete
-                      </button>
-                    {/if}
-                  </td>
-                </tr>
-              {/if}
-          {/each}
+<EventTable
+events={localEvents}
+user={user}
+isMentor={isMentor}
+isCoach={isCoach}
+addEvent={addEvent}
+optInAsMentor={optInAsMentor}
+toggleEditMode={toggleEditMode}
+saveEvent={saveEvent}
+deleteEvent={deleteEvent}
+/>
 
-        </tbody>
-      </table>
-    </div>
-  {/if}
-  <!-- Falls der Benutzer Coach oder Admin ist, wird ein Button zum Hinzufügen eines neuen Events angezeigt -->
-  {#if isCoach}
-    <button
-      class="mt-4 text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
-      on:click={addEvent}
-    >
-      Add New Event
-    </button>
-  {/if}
+<!--calendar view-->
 {:else}
   <!-- Kalenderansicht: Zeige den Kalender mit den definierten Plugins und Optionen -->
-  <Calendar {plugins} {options} />
+  <FullCalendar events={calendarEvents} />
+  <!-- Hinweis: Die Kalenderansicht wird durch die FullCalendar-Komponente dargestellt. -->
 {/if}

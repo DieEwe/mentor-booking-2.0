@@ -1,6 +1,9 @@
 <script lang="ts">
   import type { User } from '$lib/data';
 
+  import { faGithub, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+  import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
+
   export let user: User;
 
   // Voller Name nur anzeigen, wenn erlaubt.
@@ -69,26 +72,24 @@
   <!-- Optionale Social Links (falls du sie verwenden möchtest) -->
   <div class="flex justify-center space-x-4 mt-4 text-gray-500">
     {#if user.github}
-      <a href={user.github} target="_blank" rel="noopener" aria-label="GitHub">
-        <!-- GitHub Icon -->
-        <svg viewBox="0 0 24 24" class="w-5 h-5"> ... </svg>
-      </a>
+    <a href={user.github} target="_blank">
+      <FontAwesomeIcon icon={faGithub} />
+    </a>
     {/if}
     {#if user.twitter}
-      <a href={user.twitter} target="_blank" rel="noopener" aria-label="Twitter">
-        <!-- Twitter Icon -->
-        <svg viewBox="0 0 24 24" class="w-5 h-5"> ... </svg>
+      <a href={user.twitter} target="_blank">
+        <FontAwesomeIcon icon={faTwitter} />
       </a>
     {/if}
     {#if user.linkedin}
-      <a href={user.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">
-        <!-- LinkedIn Icon -->
-        <svg viewBox="0 0 24 24" class="w-5 h-5"> ... </svg>
+      <a href={user.linkedin} target="_blank">
+        <FontAwesomeIcon icon={faLinkedin} />
       </a>
     {/if}
+  
   </div>
 
-  <!-- Beispiel-Button -->
+ 
   <button
     class="mt-4 bg-blue-600 text-white px-4 py-2 rounded 
            hover:bg-blue-700 focus:outline-none"

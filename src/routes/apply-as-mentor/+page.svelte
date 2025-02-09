@@ -1,19 +1,28 @@
 <!-- src/routes/apply-as-mentor/+page.svelte -->
 <script lang="ts">
   // description of how to apply
+
+  import { goto } from '$app/navigation';
+  function handleClick() {
+    goto('https://cloud.seatable.io/...');
+  }
 </script>
 
 <p class="text-lg font-medium mb-4">
   Wir freuen uns, dass du dich als MentorIn bewerben möchtest. Bitte nimm dir kurz Zeit und fülle unser Bewerbungsformular aus.
 </p>
+<button 
+class="text-white bg-blue-700 hover:bg-blue-800 
+           font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+           on:click={handleClick}>Zur Bewerbung</button>
 
-<button
+<!-- <button
     class="text-white bg-blue-700 hover:bg-blue-800 
            font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
     on:click={() => window.location.href = 'https://cloud.seatable.io/dtable/forms/1ca77ba1-a9b9-4e05-9171-47bdb2c6d219/'}
   >
     Zur Bewerbung
-  </button>
+  </button> -->
 
 
 <!-- <script lang="ts">

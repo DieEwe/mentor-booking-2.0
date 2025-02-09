@@ -40,9 +40,11 @@ export function updateEvent(eventId: number, newData: Partial<CoachingEvent>, us
       );
     });
   } else {
-    console.warn("Unauthorized access: Only admins and coaches can edit events.");
+    throw new Error('Unauthorized'); 
+    // or return a { success: false, reason: 'Unauthorized' } 
   }
 }
+
 
 /**
  * Funktion, um einen Benutzer anzumelden.
