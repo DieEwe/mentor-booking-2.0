@@ -11,9 +11,9 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import interactionPlugin from '@fullcalendar/interaction';
-  import '@fullcalendar/core/main.css';
-  import '@fullcalendar/daygrid/main.css';
-  import '@fullcalendar/timegrid/main.css';
+  //import '@fullcalendar/core/main.css';
+  //import '@fullcalendar/daygrid/main.css';
+  //import '@fullcalendar/timegrid/main.css';
 
   // Importiere die EventTable-Komponente.
   import EventTable from '$lib/components/EventTable.svelte';
@@ -176,6 +176,15 @@ deleteEvent={deleteEvent}
 <!--calendar view-->
 {:else}
   <!-- Kalenderansicht: Zeige den Kalender mit den definierten Plugins und Optionen -->
-  <FullCalendar events={calendarEvents} />
+  <FullCalendar
+  plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
+  events={calendarEvents}
+  headerToolbar={{
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek'
+  }}
+/>
+
   <!-- Hinweis: Die Kalenderansicht wird durch die FullCalendar-Komponente dargestellt. -->
 {/if}
