@@ -1,12 +1,74 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-/* Global text styles */
-body {
-    @apply font-sans text-gray-900 bg-gray-50 dark:bg-gray-900 dark:text-gray-200;
+
+
+/* --- Custom Hero Background and Text Effects --- */
+.hero-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   }
   
-  /* Standard container width */
+  .white-shadow {
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+  }
+  
+  /* --- Custom Button Styles --- */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-hover text-white font-bold py-2 px-4 rounded transition-transform duration-200;
+  }
+  .btn-primary:hover {
+    transform: scale(1.05);
+  }
+  
+  /* --- Navigation Link Effects --- */
+  .nav-link {
+    color: var(--black-new);
+    border-radius: 16px;
+    padding: 12px 14px;
+    font-weight: 400;
+    line-height: 19.6px;
+    text-decoration: none;
+    transition: all .25s
+}
+  
+  /* --- Container Adjustments --- */
   .container {
     @apply max-w-7xl mx-auto px-4;
   }
+
+  .navbar_container {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    grid-template-rows: auto;
+    grid-template-columns: .375fr 1fr .375fr;
+    grid-auto-columns: 1fr;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid
+;
+}
+  
+  /* --- Example Slider & Arrow Styles (for later slider components) --- */
+  .slider-arrow {
+    width: 2rem;
+    height: 2rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+  .slider-arrow:hover {
+    opacity: 1;
+  }
+  
+  /* --- Responsive typography if desired --- */
+  .h1-heading {
+    @apply font-heading text-4xl md:text-5xl text-gray-800;
+  }
+  .h3-heading {
+    @apply font-heading text-2xl md:text-3xl text-gray-800 white-shadow;
+  }
+  

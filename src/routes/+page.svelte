@@ -3,7 +3,8 @@
     import Button from '$lib/components/Button.svelte';
   </script>
   
-  <h1 class="text-3xl font-bold mb-4">Mentor Booking</h1>
+  
+   <h1 class="text-3xl font-bold mb-4">Mentor Booking</h1>
   
   <div class="bg-gray-300 w-80 h-40 mb-4 flex items-center justify-center">
     <span class="text-gray-700">Placeholder Image</span>
@@ -19,5 +20,5 @@
     type="secondary"
   >
     Placeholder Button 2
-  </Button>
+  </Button> 
   
