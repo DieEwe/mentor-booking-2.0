@@ -1,5 +1,6 @@
 <script lang="ts">
     // Minimal landing page
+    import Button from '$lib/components/Button.svelte';
   </script>
   
   <h1 class="text-3xl font-bold mb-4">Mentor Booking</h1>
@@ -8,17 +9,15 @@
     <span class="text-gray-700">Placeholder Image</span>
   </div>
   
-  <button
-    class="text-black bg-primary hover:bg-primary-hover 
-           font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+  <Button
+    type="primary"
   >
     Placeholder Button 1
-  </button>
+  </Button>
   
-  <button
-    class="text-white bg-green-600 hover:bg-green-700
-           font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+  <Button
+    type="secondary"
   >
     Placeholder Button 2
-  </button>
+  </Button>
   

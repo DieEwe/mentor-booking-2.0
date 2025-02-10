@@ -37,6 +37,15 @@ module.exports = {
 				DEFAULT: '#f84d42', // rot
 				hover: '#F86257'
 			  },
+			dark: {
+				DEFAULT: '#1F2937',
+				lighter: '#374151',
+				lightest: '#6B7280',
+			  },
+			light: {
+				DEFAULT: '#F3F4F6',
+				darker: '#E5E7EB'
+			  }
 			// You can define more colors as needed
 		},
 	  }

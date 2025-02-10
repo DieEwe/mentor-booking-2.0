@@ -1,3 +1,12 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+/* Global text styles */
+body {
+    @apply font-sans text-gray-900 bg-gray-50 dark:bg-gray-900 dark:text-gray-200;
+  }
+  
+  /* Standard container width */
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
