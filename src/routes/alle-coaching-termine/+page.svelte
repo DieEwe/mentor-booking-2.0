@@ -17,6 +17,7 @@
 
   // Importiere die EventTable-Komponente.
   import EventTable from '$lib/components/EventTable.svelte';
+  import Switch from '$lib/components/Switch.svelte';
 
   // Lese initial den Wert des coachingEvents-Stores aus und speichere ihn in der lokalen Variable "localEvents".
   // Falls der Store leer ist, wird ein leeres Array verwendet.
@@ -28,6 +29,12 @@
   // Variable zur Steuerung, ob die Tabelle oder der Kalender angezeigt wird.
   // Standardmäßig wird hier die Tabellenansicht genutzt.
   let viewMode: 'table' | 'calendar' = 'table'; // Toggle state
+
+  // Instead of viewMode directly, we bind the switch's value.
+  let switchValue: string = 'off'; // 'off' means table view by default.
+
+  // Derive the viewMode based on the switch value.
+  $: viewMode = switchValue === 'on' ? 'calendar' : 'table';
 
   // Reaktive Anweisungen: Aktualisiere "localEvents" und "user" automatisch,
   // sobald sich die zugrunde liegenden Stores ($coachingEvents und $currentUser) ändern.
@@ -155,9 +162,12 @@
 </script>
 
 <!-- Button zum Umschalten zwischen Tabellen- und Kalenderansicht -->
-<button class="mb-4 px-4 py-2 bg-blue-500 text-white rounded" on:click={toggleView}>
-  Toggle to {viewMode === 'table' ? 'Calendar' : 'Table'} View
-</button>
+<Switch 
+bind:value={switchValue} 
+label={switchValue === 'on' ? 'Kalender' : 'Events'} 
+design="slider"
+fontSize={12}
+/>
 
 <!--table view-->
 {#if viewMode === 'table'}

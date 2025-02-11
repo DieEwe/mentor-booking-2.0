@@ -1,14 +1,9 @@
 <script lang="ts">
-    export let type: 'primary' | 'secondary' | 'third' = 'primary';
+    export let type: 'primary' | 'secondary' | 'third' | 'navbutton1' = 'primary'; // Default to primary button style
   </script>
   
-  <button
-    class="btn-primary" 
-    class:bg-secondary={type === 'secondary'}
-    class:bg-third={type === 'third'}
-    class:hover:bg-secondary-hover={type === 'secondary'}
-    class:hover:bg-third-hover={type === 'third'}
-  >
+  <button class="btn {type === 'primary' ? 'btn-primary' : type === 'secondary' ? 'btn-secondary' : type === 'navbutton1' ? 'btn-nav1' : 'btn-third'}">
     <slot />
   </button>
+  
   

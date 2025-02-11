@@ -15,7 +15,7 @@
     export let deleteEvent: (id: number) => void;
   </script>
   
-  <h2 class="text-2xl font-semibold mb-4">Alle Coaching Termine</h2>
+  <h1 class="gradient">Alle Coaching Termine</h1>
   
   {#if events.length === 0}
     <p>No events available.</p>
@@ -54,10 +54,10 @@
   
   {#if isCoach}
     <button
-      class="mt-4 text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
+      class="btn-secondary"
       on:click={addEvent}
     >
-      Add New Event
+      Event hinzufügen
     </button>
   {/if}
   

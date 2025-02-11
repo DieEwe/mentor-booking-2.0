@@ -1,74 +1,327 @@
+/* app.css */
+
+/* Import Tailwind's core layers:
+   - base: Provides Tailwind's preflight (CSS reset) and base element styles.
+   - components: Includes any pre-built component styles.
+   - utilities: Provides utility classes for rapid styling.
+*/
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* ------------------------------------------------------------------
+   Custom Hero Background and Text Effects
+   ------------------------------------------------------------------ */
 
-/* --- Custom Hero Background and Text Effects --- */
+/* A custom class to create a gradient background for hero sections.
+   This mimics a Tailwind gradient utility but is manually defined. */
 .hero-gradient {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  }
-  
-  .white-shadow {
-    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
-  }
-  
-  /* --- Custom Button Styles --- */
-  .btn-primary {
-    @apply bg-gradient-to-r from-primary to-primary-hover text-white font-bold py-2 px-4 rounded transition-transform duration-200;
-  }
-  .btn-primary:hover {
-    transform: scale(1.05);
-  }
-  
-  /* --- Navigation Link Effects --- */
-  .nav-link {
-    color: var(--black-new);
-    border-radius: 16px;
-    padding: 12px 14px;
-    font-weight: 400;
-    line-height: 19.6px;
-    text-decoration: none;
-    transition: all .25s
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
 }
+
+/* Base styles converted from @apply directives */
+
+/* Body styles equivalent to:
+   @apply text-base text-gray-700 leading-relaxed font-sans; */
+   body {
+    font-size: 1rem;                     /* text-base */
+    color: #374151;                      /* text-gray-700 */
+    line-height: 1.625;                  /* leading-relaxed (approximate) */
+    font-family: "Inter", ui-sans-serif, system-ui;  /* font-sans (as defined in your config) */
+  }
   
-  /* --- Container Adjustments --- */
-  .container {
-    @apply max-w-7xl mx-auto px-4;
+  /* Paragraph styling equivalent to:
+     @apply mb-4; */
+  p {
+    margin-bottom: 1rem;                 /* mb-4 */
+  }
+  
+  /* Heading styling equivalent to:
+     @apply font-heading text-gray-800; */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", ui-sans-serif, system-ui;  /* font-heading (as defined in your config) */
+    color: #1f2937;                      /* text-gray-800 */
+  }
+  
+  /* Anchor styling equivalent to:
+     @apply text-primary hover:text-primary-hover transition-colors; */
+  a {
+    color: #000000;                      /* text-primary */
+    transition: #cfcfcf 150ms ease-in-out;  /* transition-colors */
+  }
+  
+  /* Hover state for anchor */
+  /* a:hover {
+    color: #1d4ed8;                      
+  } */
+  
+  /* List styling equivalent to:
+     @apply list-disc ml-6 mb-4; */
+  ul,
+  ol {
+    list-style-type: none;               /* list-disc */
+    margin-left: 1.5rem;                 /* ml-6 (Tailwind spacing scale: 6 ≈ 1.5rem) */
+    margin-bottom: 1rem;                 /* mb-4 */
+  }
+  
+  /* Blockquote styling equivalent to:
+     @apply border-l-4 pl-4 italic text-gray-600; */
+  blockquote {
+    border-left: 4px solid #4b5563;       /* border-l-4 and matching text-gray-600 */
+    padding-left: 1rem;                  /* pl-4 */
+    font-style: italic;                  /* italic */
+    color: #4b5563;                      /* text-gray-600 */
+  }
+  
+
+
+/* Set a background color and reset margins/padding for the entire page.
+   This ensures a consistent base styling across the application. */
+html, body {  
+  background-color: #d8dae6; /* A soft gray/purple tone */
+  margin: 0;
+  padding: 0;
+}
+
+/* A utility class to add a subtle white text shadow effect.
+   Can be used on headings or text elements where a light shadow is desired. */
+.white-shadow {
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+}
+
+/* ------------------------------------------------------------------
+   Custom Button Styles
+   ------------------------------------------------------------------ */
+
+/* Primary Button:
+   - Uses a custom gradient background.
+   - Applies text color, font weight, padding, border radius, and transition effects.
+   Note: This custom style replaces an equivalent Tailwind @apply block.
+*/
+.btn-primary {
+  background-image: linear-gradient(to right, #3a3a3a, #000000);
+  color: #ffffff;
+  font-weight: 500;
+  margin: 0.5rem;
+  padding-top: 0.5rem;    /* Tailwind's py-2 */
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;     /* Tailwind's px-4 */
+  padding-right: 1rem;
+  border-radius: 0.75rem; /* Tailwind's rounded */
+  transition: transform 200ms ease;
+}
+
+/* Hover effect for the primary button to scale up slightly. */
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+/* Secondary Button:
+   Similar to the primary button, but with different gradient colors.
+*/
+.btn-secondary {
+  background-image: linear-gradient(to right, #ffffff, #39b2c1);
+  color: #000000;
+  font-weight: 500;
+  margin: 0.5rem;
+  padding-top: 0.5rem;    /* Tailwind's py-2 */
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;     /* Tailwind's px-4 */
+  padding-right: 1rem;
+  border-radius: 0.75rem; /* Tailwind's rounded */
+  transition: transform 200ms ease;
+}
+
+/* Hover effect for the secondary button to scale up slightly. */
+.btn-secondary:hover {
+  transform: scale(1.05);
+}
+
+/* ------------------------------------------------------------------
+   Navigation Button Effects
+   ------------------------------------------------------------------ */
+.btn-nav1 {
+  /* Padding: py-2 (0.5rem top and bottom) and px-4 (1rem left and right) */
+  padding: 0.5rem 1rem;
+
+  /* Rounded corners: rounded-md (approximately 0.375rem) */
+  border-radius: 0.7rem;
+
+  /* Background and border colors */
+  background-color: #000; /* bg-black */
+  border: 1px solid #4B5563; /* border and border-gray-600 */
+
+  /* Text styling */
+  color: #fff; /* text-white */
+  font-size: 14px; /* text-md (assumed 16px; adjust as needed) */
+}
+
+/* Hover state: changes the background color */
+.btn-nav1:hover {
+  background-color: #111827; /* hover:bg-gray-900 */
+}
+
+.btn-nav2 {
+  /* Padding: py-2 (0.5rem top and bottom) and px-4 (1rem left and right) */
+  padding: 0.5rem 1rem;
+  
+  /* Rounded corners: rounded-md (~0.375rem) */
+  border-radius: 0.7rem;
+  
+  /* Background color: bg-white */
+  background-color: #ffffff;
+  
+  /* Border: 1px solid with the color of border-gray-600 */
+  border: 1px solid #4B5563;
+  
+  /* Text color: text-gray-800 */
+  color: #1F2937;
+  
+  /* Font size: text-md (assumed to be 16px) */
+  font-size: 14px;
+}
+
+.btn-nav2:hover {
+  /* Hover background: hover:bg-gray-300 */
+  background-color: #D1D5DB;
+}
+
+
+/* Custom style for navigation links.
+   - Applies a dark gray text color.
+   - Rounds the corners.
+   - Sets padding, font weight, line height, and a transition for smoother hover effects.
+*/
+.nav-link {
+  color: #1f2937; /* Dark gray from Tailwind's palette */
+  border-radius: 16px;
+  padding: 12px 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+/* ------------------------------------------------------------------
+   Container Adjustments
+   ------------------------------------------------------------------ */
+
+/* Custom container class that mimics Tailwind's utility:
+   - Sets a maximum width equivalent to Tailwind's max-w-7xl (80rem).
+   - Centers the container horizontally and adds horizontal padding.
+*/
+.container {
+  max-width: 80rem;  /* Approximately Tailwind's max-w-7xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;  /* Equivalent to Tailwind's px-4 */
+  padding-right: 1rem;
+}
+
+/* ------------------------------------------------------------------
+   Navbar Container (Commented Out)
+   ------------------------------------------------------------------
+   This section provides a grid layout for a navbar.
+   Uncomment and adjust if you need a custom navbar layout.
+*/
+/*
+.navbar-container {
+  display: grid;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  grid-template-rows: auto;
+  grid-template-columns: 0.375fr 1fr 0.375fr;
+  grid-auto-columns: 1fr;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+*/
+
+/* ------------------------------------------------------------------
+   Example Slider & Arrow Styles
+   ------------------------------------------------------------------ */
+
+/* Styles for slider arrow icons:
+   - Sets a fixed width and height.
+   - Applies an initial opacity and a transition for opacity changes on hover.
+*/
+.slider-arrow {
+  width: 2rem;
+  height: 2rem;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* Increase opacity when hovering over the slider arrow. */
+.slider-arrow:hover {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------
+   Responsive Typography
+   ------------------------------------------------------------------ */
+h1 {
+    color: var(--black-new);
+    font-family: Cosmica, sans-serif;
+    font-size: 36px;
+    /* font-weight: 600; */
+    line-height: 144%;
+  }
+  
+h1.gradient {
+    z-index: 3;
+    background-color: var(--black-new);
+    text-shadow: 1px 1px 2px #142c4952;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(135deg, #595963, #040308 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: inline-block;
+    position: relative;
   }
 
-  .navbar_container {
-    grid-column-gap: 16px;
-    grid-row-gap: 16px;
-    grid-template-rows: auto;
-    grid-template-columns: .375fr 1fr .375fr;
-    grid-auto-columns: 1fr;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1440px;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    display: grid
-;
+/* Custom Heading Styles:
+   H1 Heading style that uses the 'Montserrat' font,
+   a large font size, and a dark gray color.
+*/
+.h1-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.25rem; /* Equivalent to Tailwind's text-4xl */
+  color: #1f2937;     /* Dark gray (Tailwind's text-gray-800) */
 }
-  
-  /* --- Example Slider & Arrow Styles (for later slider components) --- */
-  .slider-arrow {
-    width: 2rem;
-    height: 2rem;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-  }
-  .slider-arrow:hover {
-    opacity: 1;
-  }
-  
-  /* --- Responsive typography if desired --- */
+
+/* Increase the font size for H1 headings on medium screens and up. */
+@media (min-width: 768px) {
   .h1-heading {
-    @apply font-heading text-4xl md:text-5xl text-gray-800;
+    font-size: 3rem; /* Equivalent to Tailwind's md:text-5xl */
   }
+}
+
+/* Custom H3 Heading style:
+   Similar to H1 but smaller and includes a text shadow for extra effect.
+*/
+.h3-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem; /* Equivalent to Tailwind's text-2xl */
+  color: #1f2937;    /* Dark gray */
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7); /* White shadow effect */
+}
+
+/* Increase the font size for H3 headings on medium screens and up. */
+@media (min-width: 768px) {
   .h3-heading {
-    @apply font-heading text-2xl md:text-3xl text-gray-800 white-shadow;
+    font-size: 1.875rem; /* Equivalent to Tailwind's md:text-3xl */
   }
-  
+}
+
+/* More headings */

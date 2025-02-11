@@ -14,22 +14,16 @@
   // Anzeige-Badges für Rolle + evtl. Behinderungsstatus.
   // Du kannst diesen Array flexibel erweitern.
   // Deklariere badges von vornherein als string[]
-    let badges: string[] = [];
+  $: badges = [
+  ...(user.role ? [user.role] : []),
+  ...(user.isDisabilityVisibleOnProfile
+    ? [
+        user.hasVisibleDisability ? 'visible disability' : null,
+        user.hasInvisibleDisability ? 'non-visible disability' : null
+      ].filter(Boolean)
+    : [])
+];
 
-  // Rolle (admin, coach, mentor, guest) als Badge hinzufügen
-  if (user.role) {
-    badges.push(user.role);
-  }
-
-  // Behinderung nur anzeigen, wenn vom User erlaubt
-  if (user.isDisabilityVisibleOnProfile) {
-    if (user.hasVisibleDisability) {
-      badges.push('visible disability');
-    }
-    if (user.hasInvisibleDisability) {
-      badges.push('non-visible disability');
-    }
-  }
 </script>
 
 <!-- Container Card -->
