@@ -3,15 +3,11 @@
 /* Import Tailwind's core layers:
    - base: Provides Tailwind's preflight (CSS reset) and base element styles.
    - components: Includes any pre-built component styles.
-   - utilities: Provides utility classes for rapid styling.
-*/
+   - utilities: Provides utility classes for rapid styling.*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* @import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities'; */
 
 /* ------------------------------------------------------------------
    Custom Hero Background and Text Effects
