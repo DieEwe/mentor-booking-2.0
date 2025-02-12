@@ -1,5 +1,6 @@
 <script lang="ts">
     import EventRow from '$lib/components/EventRow.svelte';
+    import PlusFab from '$lib/components/PlusFab.svelte';
     import type { CoachingEvent, User } from '$lib/data';
   
     export let events: CoachingEvent[] = [];
@@ -53,11 +54,10 @@
   {/if}
   
   {#if isCoach}
-    <button
-      class="btn-secondary"
-      on:click={addEvent}
-    >
-      Event hinzufügen
-    </button>
-  {/if}
-  
+  <div class="flex items-center space-x-2">
+    <!-- PlusFab is your custom FAB component that shows the plus icon -->
+    <PlusFab on:click={addEvent} />
+    <span class="text-gray-700 text-md">Event hinzufügen</span>
+  </div>
+{/if}
+

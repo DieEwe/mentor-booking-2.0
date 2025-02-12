@@ -18,7 +18,7 @@
   // Importiere die EventTable-Komponente.
   import EventTable from '$lib/components/EventTable.svelte';
   import Switch from '$lib/components/Switch.svelte';
-
+  import PlusFab from '$lib/components/PlusFab.svelte';
   // Lese initial den Wert des coachingEvents-Stores aus und speichere ihn in der lokalen Variable "localEvents".
   // Falls der Store leer ist, wird ein leeres Array verwendet.
   let localEvents: CoachingEvent[] = get(coachingEvents) ?? [];
