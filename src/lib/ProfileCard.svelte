@@ -1,51 +1,74 @@
 <script lang="ts">
   import type { User } from '$lib/data';
+
   import { faGithub, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 
   export let user: User;
 
-  // Display full name only if allowed
-  $: fullName = user.canShowFullName
+  // Voller Name nur anzeigen, wenn erlaubt.
+  $: fullName = user.canShowFullName 
     ? `${user.firstName} ${user.lastName}`
     : user.firstName || 'Anonymous';
 
-  // Build an array of badges (role, disability info, etc.)
+  // Anzeige-Badges für Rolle + evtl. Behinderungsstatus.
+  // Du kannst diesen Array flexibel erweitern.
+  // Deklariere badges von vornherein als string[]
   $: badges = [
-    ...(user.role ? [user.role] : []),
-    ...(user.isDisabilityVisibleOnProfile
-      ? [
-          user.hasVisibleDisability ? 'visible disability' : null,
-          user.hasInvisibleDisability ? 'non-visible disability' : null
-        ].filter(Boolean)
-      : [])
-  ];
+  ...(user.role ? [user.role] : []),
+  ...(user.isDisabilityVisibleOnProfile
+    ? [
+        user.hasVisibleDisability ? 'visible disability' : null,
+        user.hasInvisibleDisability ? 'non-visible disability' : null
+      ].filter(Boolean)
+    : [])
+];
+
 </script>
 
-<div class="profile-card">
-  <div class="profile-image">
-    <img src={user.avatar || 'https://via.placeholder.com/100'} alt="Profilbild" />
+<!-- Container Card -->
+<div class="max-w-sm mx-auto bg-white rounded-xl shadow-md p-6 text-center">
+  <!-- Profilfoto, falls vorhanden -->
+  <div class="w-24 h-24 mx-auto rounded-full overflow-hidden">
+    <img
+      src={user.avatar || 'https://via.placeholder.com/100'}
+      alt="Profilbild"
+      class="object-cover w-full h-full"
+    />
   </div>
 
-  <h2>{fullName}</h2>
+  <!-- Name -->
+  <h2 class="mt-4 text-2xl font-semibold text-gray-800">
+    {fullName}
+  </h2>
 
+  <!-- Badges -->
   {#if badges.length > 0}
-    <div class="badges">
+    <div class="flex flex-wrap justify-center gap-2 mt-3">
       {#each badges as b}
-        <span class="badge">{b}</span>
+        <span
+          class="inline-block bg-gray-200 text-gray-700 text-xs 
+                 font-medium px-2 py-1 rounded"
+        >
+          {b}
+        </span>
       {/each}
     </div>
   {/if}
 
+  <!-- Beschreibung -->
   {#if user.description}
-    <p class="profile-description">{user.description}</p>
+    <p class="mt-4 text-gray-700 text-sm">
+      {user.description}
+    </p>
   {/if}
 
-  <div class="social-links">
+  <!-- Optionale Social Links (falls du sie verwenden möchtest) -->
+  <div class="flex justify-center space-x-4 mt-4 text-gray-500">
     {#if user.github}
-      <a href={user.github} target="_blank">
-        <FontAwesomeIcon icon={faGithub} />
-      </a>
+    <a href={user.github} target="_blank">
+      <FontAwesomeIcon icon={faGithub} />
+    </a>
     {/if}
     {#if user.twitter}
       <a href={user.twitter} target="_blank">
@@ -57,7 +80,14 @@
         <FontAwesomeIcon icon={faLinkedin} />
       </a>
     {/if}
+  
   </div>
 
-  <button class="btn btn-primary">Contact Me</button>
+ 
+  <button
+    class="mt-4 bg-blue-600 text-white px-4 py-2 rounded 
+           hover:bg-blue-700 focus:outline-none"
+  >
+    Contact Me
+  </button>
 </div>
